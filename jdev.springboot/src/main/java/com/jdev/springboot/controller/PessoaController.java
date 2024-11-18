@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.jdev.springboot.model.Pessoa;
 import com.jdev.springboot.repository.PessoaRepository;
@@ -28,4 +29,11 @@ public class PessoaController {
 		return "cadastro/cadastropessoa";
 	}
 	
+	/**
+	 * Metodo para listar os cadastros
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/listapessoas")
+	public ModelAndView pessoas() {
+		
+	}
 }
