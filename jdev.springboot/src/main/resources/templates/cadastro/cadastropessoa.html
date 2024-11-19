@@ -2,7 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
+<title>Spring Boot MVC - Thymeleaf - JPA - PostegreSQL - Cadastro</title>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="materialize/css/materialize.css"  media="screen,projection"/>
+<link type="text/css" rel="stylesheet" href="materialize.min.css"  media="screen,projection"/>
+
 </head>
 <body>
 	<h1>Cadastro de Pessoa</h1>
@@ -13,10 +19,20 @@
 		<input name="sobrenome">
 		<label>Idade:</label>
 		<input name="idade">
-		<input type="submit" value="Salvar">
+		<input class="waves-effect waves-light btn" type="submit" value="Salvar">
 	</form>
 	
-	<a href="/listapessoas">Lista Pessoas</a>
+	
+	<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo right">Logo</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="/">Home</a></li>
+        <li><a href="/cadastropessoa">Cad.Pessoas</a></li>
+        <li><a href="/listapessoas">Lista de Pessoas</a></li>
+      </ul>
+    </div>
+  </nav>
 	
 	<table>
 		<tr th:each = "pessoa : ${pessoas}">
@@ -26,5 +42,7 @@
 		</tr>
 	</table>
 	
+	<script type="text/javascript" src="materialize/js/materialize.js"></script>
+	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 </body>
 </html>
