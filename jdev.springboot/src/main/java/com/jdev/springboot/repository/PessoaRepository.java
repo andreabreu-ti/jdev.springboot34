@@ -13,6 +13,8 @@ import com.jdev.springboot.model.Pessoa;
 @Transactional
 public interface PessoaRepository extends CrudRepository<Pessoa, Long>{
 
-	@Query("select p from Pessoa p where p.nome like ")
-	List<Pessoa> findPessoaByName(String, nome)	;
+
+	@Query("select p from Pessoa p where p.nome like %?1%")
+	List<Pessoa> findPessoaByName(String nome);
+	
 }
