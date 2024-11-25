@@ -13,13 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jdev.springboot.model.Pessoa;
+import com.jdev.springboot.model.Telefone;
 import com.jdev.springboot.repository.PessoaRepository;
+import com.jdev.springboot.repository.TelefoneRepository;
 
 @Controller
 public class PessoaController {
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
+	
+	@Autowired
+	private TelefoneRepository telefoneRepository;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastropessoa")
 	public ModelAndView inicio() {
@@ -120,6 +125,23 @@ public class PessoaController {
 
 		return modelAndView;
 
+	}
+	
+	/*
+	 * Método para salvar telefones por id
+	 */
+	@PostMapping("/addfonePessoa/{pessoaid}")
+	public ModelAndView addFonePessoa(Telefone telefone, @PathVariable("pessoaid") Long pessoaid) {
+		
+		Pessoa pessoa = pessoaRepository.findById(pessoaid).get();
+		telefone.setPessoa(pessoa);
+		
+		telefoneRepository.save(telefone);
+
+		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+		modelAndView.addObject("pessoaobj", pessoa);
+		return modelAndView;
+		
 	}
 
 }

@@ -29,6 +29,17 @@
 <body>
 	<h5>Cadastro de Pessoa</h5>
 	
+	<nav>
+		<div class="nav-wrapper">
+			<a href="#" class="brand-logo right">Logo</a>
+			<ul id="nav-mobile" class="left hide-on-med-and-down">
+				<li><a href="/">Home</a></li>
+				<li><a href="/cadastropessoa">Cad.Pessoas</a></li>
+				<li><a href="/listapessoas">Lista de Pessoas</a></li>
+			</ul>
+		</div>
+	</nav>
+	
 	<div class="row">
 		<form action="/salvarpessoa" id="formpessoa" method="POST" th:object="${pessoaobj}">
 			
@@ -69,16 +80,6 @@
 	<br>
 	<br />
 
-	<nav>
-		<div class="nav-wrapper">
-			<a href="#" class="brand-logo right">Logo</a>
-			<ul id="nav-mobile" class="left hide-on-med-and-down">
-				<li><a href="/">Home</a></li>
-				<li><a href="/cadastropessoa">Cad.Pessoas</a></li>
-				<li><a href="/listapessoas">Lista de Pessoas</a></li>
-			</ul>
-		</div>
-	</nav>
 	
 	<div class="row">
 		<form action="pesquisarpessoa" method="post" class="col s12">
