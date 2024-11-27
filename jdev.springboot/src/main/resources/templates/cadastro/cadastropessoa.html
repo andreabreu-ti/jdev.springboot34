@@ -40,6 +40,12 @@
 		</div>
 	</nav>
 	
+	<br/>
+		<div th:each = "m : ${msg}">
+			<span th:text = "${m}"></span>
+		</div>
+	<br/>
+	
 	<div class="row">
 		<form action="/salvarpessoa" id="formpessoa" method="POST" th:object="${pessoaobj}">
 			
