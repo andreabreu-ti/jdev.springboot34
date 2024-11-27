@@ -75,6 +75,14 @@
 		</form>
 	</div>
 	
+	
+	<table class="striped">
+		<tr th:each="fone : ${telefones}">
+			<td th:text="${fone.numero}"></td>
+			<td th:text="${fone.tipo}"></td>
+		</tr>
+	</table>
+	
 
 	<script type="text/javascript" src="materialize/js/materialize.js"></script>
 	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>

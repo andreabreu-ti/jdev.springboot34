@@ -22,7 +22,7 @@ public class PessoaController {
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
-	
+
 	@Autowired
 	private TelefoneRepository telefoneRepository;
 
@@ -31,10 +31,9 @@ public class PessoaController {
 
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
 		modelAndView.addObject("pessoaobj", new Pessoa());
-		
+
 		Iterable<Pessoa> pessoaIt = pessoaRepository.findAll();
 		modelAndView.addObject("pessoas", pessoaIt);
-		
 
 		return modelAndView;
 	}
@@ -98,20 +97,19 @@ public class PessoaController {
 		return modelAndView;
 
 	}
-	
+
 	/**
 	 * Metodo para pesquisar por nome
 	 */
 	@PostMapping("/pesquisarpessoa")
 	public ModelAndView pesquisar(@RequestParam("nomepesquisa") String nomepesquisa) {
-		
+
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
-		modelAndView.addObject("pessoas",pessoaRepository.findPessoaByName(nomepesquisa));
+		modelAndView.addObject("pessoas", pessoaRepository.findPessoaByName(nomepesquisa));
 		modelAndView.addObject("pessoaobj", new Pessoa());
 		return modelAndView;
 	}
-	
-	
+
 	/**
 	 * Metodo para telefones
 	 */
@@ -122,31 +120,29 @@ public class PessoaController {
 
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
 		modelAndView.addObject("pessoaobj", pessoa.get());
+		modelAndView.addObject("telefones", telefoneRepository.getTelefones(idpessoa));
 
 		return modelAndView;
 
 	}
-	
+
 	/*
 	 * Método para salvar telefones por id
 	 */
 	@PostMapping("/addfonePessoa/{pessoaid}")
 	public ModelAndView addFonePessoa(Telefone telefone, @PathVariable("pessoaid") Long pessoaid) {
-		
+
 		Pessoa pessoa = pessoaRepository.findById(pessoaid).get();
 		telefone.setPessoa(pessoa);
-		
+
 		telefoneRepository.save(telefone);
 
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
 		modelAndView.addObject("pessoaobj", pessoa);
-		return modelAndView;
+		modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoaid));
 		
+		return modelAndView;
+
 	}
 
 }
-
-
-
-
-
