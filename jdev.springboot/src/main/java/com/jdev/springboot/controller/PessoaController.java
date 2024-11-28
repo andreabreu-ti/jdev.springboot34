@@ -1,7 +1,6 @@
 package com.jdev.springboot.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,8 +47,8 @@ public class PessoaController {
 	/**
 	 * Metodo para salvar no banco de dados
 	 */
-//	@PostMapping("/salvarpessoa")
-	@RequestMapping(method = RequestMethod.POST, value = "/salvarpessoa")
+	@PostMapping("/salvarpessoa")
+//	@RequestMapping(method = RequestMethod.POST, value = "/salvarpessoa")
 	public ModelAndView salvar(@Valid Pessoa pessoa, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
@@ -162,14 +161,31 @@ public class PessoaController {
 	public ModelAndView addFonePessoa(Telefone telefone, @PathVariable("pessoaid") Long pessoaid) {
 
 		Pessoa pessoa = pessoaRepository.findById(pessoaid).get();
-		telefone.setPessoa(pessoa);
-
-		telefoneRepository.save(telefone);
-
+		
+		if (telefone != null && telefone.getNumero().isEmpty() || telefone.getTipo().isEmpty()) {
+			
+			ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+			modelAndView.addObject("pessoaobj", pessoa);
+			modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoaid));
+			
+			List<String> msg = new ArrayList<String>();
+			
+			if (telefone.getNumero().isEmpty()) {
+				msg.add("Número deve ser informado");
+			}
+			if (telefone.getTipo().isEmpty()) {
+				msg.add("Tipo deve ser informado");
+			}
+			
+			modelAndView.addObject("msg", msg);	
+			return modelAndView;
+		}
+		
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+		telefone.setPessoa(pessoa);
+		telefoneRepository.save(telefone);
 		modelAndView.addObject("pessoaobj", pessoa);
 		modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoaid));
-
 		return modelAndView;
 
 	}
