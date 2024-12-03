@@ -64,7 +64,8 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Para utilizar as anotações de validação como por exemplo @NotEmpty, utiliza-se estas 2 dependências -->
+		<!-- Para utilizar as anotações de validação como por exemplo @NotEmpty,
+		utiliza-se estas 2 dependências -->
 		<dependency>
 			<groupId>jakarta.validation</groupId>
 			<artifactId>jakarta.validation-api</artifactId>
@@ -73,6 +74,23 @@
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
 		</dependency>
+
+		<!-- ... other dependency elements ... -->
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
+		</dependency>
+
 
 	</dependencies>
 
