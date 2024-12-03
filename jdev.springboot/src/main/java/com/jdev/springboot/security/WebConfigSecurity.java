@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -39,12 +40,13 @@ public class WebConfigSecurity {
     // Define o UserDetailsService com um usuário em memória
     @Bean
     public UserDetailsService userDetailsService() {
-        var userDetailsManager = new InMemoryUserDetailsManager();
+        
+    	var userDetailsManager = new InMemoryUserDetailsManager();
 
         // Cria um usuário em memória
         userDetailsManager.createUser(
             User.withUsername("andre")
-                .password("123") // Senha em texto puro (somente para testes)
+                .password("$2a$10$0.2/FfTOiLeYkZRgYDOJDOmR1/s0EL/SQjOsGktzPEHb2WpJkB7S2") // Senha em texto puro (somente para testes)
                 .roles("ADMIN")
                 .build()
         );
@@ -53,10 +55,17 @@ public class WebConfigSecurity {
     }
 
     // Define um PasswordEncoder (sem codificação, apenas para testes)
-    @Bean
+    /*@Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
+    }*/
+    
+    // Define o PasswordEncoder para validar senhas criptografadas
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
+    
 
     // Define o AuthenticationManager para ser usado no sistema
     @Bean
