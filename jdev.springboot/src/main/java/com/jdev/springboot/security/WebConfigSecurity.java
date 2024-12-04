@@ -25,6 +25,7 @@ public class WebConfigSecurity {
             .csrf().disable() // Desativa CSRF
             .authorizeHttpRequests(authorize -> authorize
                     .requestMatchers("/", "/home", "/materialize/**").permitAll() // Permitir acesso público a páginas e arquivos estáticos
+                    .requestMatchers("/cadastropessoa").hasAnyRole("ADMIN")
                     .anyRequest().authenticated() // Requer autenticação para outras URLs
                 )
             .formLogin(form -> form
