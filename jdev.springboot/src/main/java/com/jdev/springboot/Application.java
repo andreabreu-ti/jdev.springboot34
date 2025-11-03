@@ -13,10 +13,11 @@ public class Application implements WebMvcConfigurer {
 
 		SpringApplication.run(Application.class, args);
 
-		/*
-		 * BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); String result =
-		 * encoder.encode("123"); System.out.println(result);
-		 */
+		
+//		  BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); String result =
+//		  encoder.encode("123"); 
+//		  System.out.println(result);
+		 
 
 	}
 
