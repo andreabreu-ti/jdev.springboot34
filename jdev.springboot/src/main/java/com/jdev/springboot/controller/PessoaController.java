@@ -11,6 +11,8 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,10 +47,14 @@ public class PessoaController {
 	/**
 	 * Metodo para salvar no banco de dados
 	 */
-	@PostMapping("/salvarpessoa")
+	
 //	@RequestMapping(method = RequestMethod.POST, value = "/salvarpessoa")
+	@PostMapping("/salvarpessoa")
 	public ModelAndView salvar(@Valid Pessoa pessoa, BindingResult bindingResult) {
-
+		
+		System.out.println("Entrou no método salvar: " + pessoa);
+		System.out.println("Valor do ID recebido no POST: " + pessoa.getId());
+		
 		pessoa.setTelefones(telefoneRepository.getTelefones(pessoa.getId()));
 		
 		if (bindingResult.hasErrors()) {
@@ -63,7 +69,7 @@ public class PessoaController {
 
 			for (ObjectError objectError : bindingResult.getAllErrors()) {
 
-				msg.add(objectError.getDefaultMessage()); // Vem da anitações @NotEmpty
+				msg.add(objectError.getDefaultMessage()); // Vem da anotação @NotEmpty
 
 			}
 
@@ -72,6 +78,7 @@ public class PessoaController {
 		}
 
 		pessoaRepository.save(pessoa);
+		System.out.println("Pessoa salva!");
 
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 		Iterable<Pessoa> pessoaIt = pessoaRepository.findAll();
